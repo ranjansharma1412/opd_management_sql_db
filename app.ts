@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors'
+import './src/middleware/databaseConnection'
+import userRouter from './src/routes/users'
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req: Request, res: Response) => {
     res.send('Express + TypeScript Server');
 });
+
+app.use('/api', userRouter);
 
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
